@@ -17,6 +17,7 @@ $(function(){
     //DOM
     posListaReproduccion=0;
     crearListaDOM();
+    actualizarEstadoLista();
     svgPlayActual();
     //eventos
     $("#svg_play").on("click",accionReproducir);
@@ -209,6 +210,7 @@ function cargarArchivo(){
     $(".aside").find("li").css("fontWeight","normal");
     $(".aside").find("li")[posListaReproduccion].style.fontWeight="bold";
 
+    actualizarEstadoLista();
     svgPlayActual();
 
     if(tipoElementoReproducir=="audio"){
@@ -373,25 +375,30 @@ function crearListaDOM(){
     var ulNodo=$(".aside").append("<ul>").children();
 
     for(var i=0;i<listaMultimedia.length;i++){
-        $(ulNodo).append("<li>").children().last().text(listaMultimedia[i].nombre).after("<div>");
+        $(ulNodo).append("<li>").children().last().text(listaMultimedia[i].nombre);
     }
 
 }
 
 
-/**Crea la estructura del svg con symbol y use.
+function actualizarEstadoLista(){
+    $(".aside").find("li").attr("class","no_reproduciendo");
+    $(".aside").find("li")[posListaReproduccion].setAttribute("class","reproduciendo");
+}
+
+/**Crea la estructura del svg.
  * 
  */
 function svgPlayActual(){
-    var xmlns,nodoSVG,nodoDivLi,nodoPath, cont;
+    var xmlns,nodoSVG,nodoLi,nodoPath, cont;
 
     xmlns="http://www.w3.org/2000/svg";
 
     cont=0;
 
-    nodoDivLi=$(".aside").find("li").next()[posListaReproduccion];
+    nodoLi=$(".aside").find("li")[posListaReproduccion];
 
-    nodoSVG=crearNodoInsertBeforeNSHtml(nodoDivLi,"svg",xmlns,"",cont++);
+    nodoSVG=crearNodoInsertBeforeNSHtml(nodoLi,"svg",xmlns,"",cont++);
     nodoSVG.setAttributeNS(null,"id","svg_play_actual");
     nodoSVG.setAttributeNS(null,"height","20px");
     nodoSVG.setAttributeNS(null,"width","20px");

@@ -134,6 +134,7 @@ html,body{
                 /*flex*/
                 display:flex;
                 flex:1 1 80%;
+                justify-content:space-between;
                 align-items:center;
                 /*fin flex*/
 
@@ -146,7 +147,14 @@ html,body{
                 background-color:pink;
             }
 
-            .aside ul li:hover{
+            .aside li svg{
+                background-color: rosybrown;
+                border-left:1px solid black;
+            }
+
+            .aside .no_reproduciendo:hover{
+                background-color: orange;
+                font-style:italic;
                 cursor:pointer;
             }
 
@@ -182,6 +190,11 @@ html,body{
         height:100%;
         background-color:black;
         border:2px solid black;
+    }
+
+     
+    #svg_play_actual{
+        order:2;
     }
 
     #svg_play_path:hover, #svg_pausa_g:hover,   #svg_retroceder_g:hover,
